@@ -1,0 +1,19 @@
+{
+  parserClass="io.github.potjerodekool.nabuidea.language.parser.NabuParser"
+  extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+
+  psiClassPrefix="Nabu"
+  psiImplClassSuffix="Impl"
+  psiPackage="io.github.potjerodekool.nabuidea.language.psi"
+  psiImplPackage="io.github.potjerodekool.nabuidea.language.psi.impl"
+
+  elementTypeHolderClass="io.github.potjerodekool.nabuidea.language.psi.NabuTypes"
+  elementTypeClass="io.github.potjerodekool.nabuidea.language.psi.NabuElementType"
+  tokenTypeClass="io.github.potjerodekool.nabuidea.language.psi.NabuTokenType"
+}
+
+nabuFile ::= item_*
+
+private item_ ::= (property|COMMENT|CRLF)
+
+property ::= (KEY? SEPARATOR VALUE?) | KEY
