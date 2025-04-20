@@ -36,65 +36,182 @@ public class NabuParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // property|COMMENT|CRLF
-  static boolean item_(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "item_")) return false;
+  // LBRACE
+  // RBRACE
+  public static boolean classBody(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "classBody")) return false;
+    if (!nextTokenIs(b, LBRACE)) return false;
     boolean r;
-    r = property(b, l + 1);
-    if (!r) r = consumeToken(b, COMMENT);
-    if (!r) r = consumeToken(b, CRLF);
+    Marker m = enter_section_(b);
+    r = consumeTokens(b, 0, LBRACE, RBRACE);
+    exit_section_(b, m, CLASS_BODY, r);
     return r;
   }
 
   /* ********************************************************** */
-  // item_*
+  // PUBLIC
+  // | PROTECTED
+  // | PRIVATE
+  // | ABSTRACT
+  // | STATIC
+  // | FINAL
+  // | SEALED
+  // | NON_SEALED
+  // | STRICTFP
+  public static boolean classModifier(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "classModifier")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, CLASS_MODIFIER, "<class modifier>");
+    r = consumeToken(b, PUBLIC);
+    if (!r) r = consumeToken(b, PROTECTED);
+    if (!r) r = consumeToken(b, PRIVATE);
+    if (!r) r = consumeToken(b, ABSTRACT);
+    if (!r) r = consumeToken(b, STATIC);
+    if (!r) r = consumeToken(b, FINAL);
+    if (!r) r = consumeToken(b, SEALED);
+    if (!r) r = consumeToken(b, NON_SEALED);
+    if (!r) r = consumeToken(b, STRICTFP);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // ordinaryCompilationUnit
+  public static boolean compilationUnit(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "compilationUnit")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, COMPILATION_UNIT, "<compilation unit>");
+    r = ordinaryCompilationUnit(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // compilationUnit
   static boolean nabuFile(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "nabuFile")) return false;
+    return compilationUnit(b, l + 1);
+  }
+
+  /* ********************************************************** */
+  // classModifier* CLASS typeIdentifier classBody
+  public static boolean normalClassDeclaration(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "normalClassDeclaration")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, NORMAL_CLASS_DECLARATION, "<normal class declaration>");
+    r = normalClassDeclaration_0(b, l + 1);
+    r = r && consumeToken(b, CLASS);
+    r = r && typeIdentifier(b, l + 1);
+    r = r && classBody(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  // classModifier*
+  private static boolean normalClassDeclaration_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "normalClassDeclaration_0")) return false;
     while (true) {
       int c = current_position_(b);
-      if (!item_(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "nabuFile", c)) break;
+      if (!classModifier(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "normalClassDeclaration_0", c)) break;
     }
     return true;
   }
 
   /* ********************************************************** */
-  // (KEY? SEPARATOR VALUE?) | KEY
-  public static boolean property(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "property")) return false;
-    if (!nextTokenIs(b, "<property>", KEY, SEPARATOR)) return false;
+  // packageDeclaration?
+  // topLevelClassOrInterfaceDeclaration*
+  public static boolean ordinaryCompilationUnit(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "ordinaryCompilationUnit")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, PROPERTY, "<property>");
-    r = property_0(b, l + 1);
-    if (!r) r = consumeToken(b, KEY);
+    Marker m = enter_section_(b, l, _NONE_, ORDINARY_COMPILATION_UNIT, "<ordinary compilation unit>");
+    r = ordinaryCompilationUnit_0(b, l + 1);
+    r = r && ordinaryCompilationUnit_1(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
 
-  // KEY? SEPARATOR VALUE?
-  private static boolean property_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "property_0")) return false;
+  // packageDeclaration?
+  private static boolean ordinaryCompilationUnit_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "ordinaryCompilationUnit_0")) return false;
+    packageDeclaration(b, l + 1);
+    return true;
+  }
+
+  // topLevelClassOrInterfaceDeclaration*
+  private static boolean ordinaryCompilationUnit_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "ordinaryCompilationUnit_1")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!topLevelClassOrInterfaceDeclaration(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "ordinaryCompilationUnit_1", c)) break;
+    }
+    return true;
+  }
+
+  /* ********************************************************** */
+  // PACKAGE IDENTIFIER (DOT IDENTIFIER)* SEMI_COLON COMMENT?
+  public static boolean packageDeclaration(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "packageDeclaration")) return false;
+    if (!nextTokenIs(b, PACKAGE)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = property_0_0(b, l + 1);
-    r = r && consumeToken(b, SEPARATOR);
-    r = r && property_0_2(b, l + 1);
+    r = consumeTokens(b, 0, PACKAGE, IDENTIFIER);
+    r = r && packageDeclaration_2(b, l + 1);
+    r = r && consumeToken(b, SEMI_COLON);
+    r = r && packageDeclaration_4(b, l + 1);
+    exit_section_(b, m, PACKAGE_DECLARATION, r);
+    return r;
+  }
+
+  // (DOT IDENTIFIER)*
+  private static boolean packageDeclaration_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "packageDeclaration_2")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!packageDeclaration_2_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "packageDeclaration_2", c)) break;
+    }
+    return true;
+  }
+
+  // DOT IDENTIFIER
+  private static boolean packageDeclaration_2_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "packageDeclaration_2_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeTokens(b, 0, DOT, IDENTIFIER);
     exit_section_(b, m, null, r);
     return r;
   }
 
-  // KEY?
-  private static boolean property_0_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "property_0_0")) return false;
-    consumeToken(b, KEY);
+  // COMMENT?
+  private static boolean packageDeclaration_4(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "packageDeclaration_4")) return false;
+    consumeToken(b, COMMENT);
     return true;
   }
 
-  // VALUE?
-  private static boolean property_0_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "property_0_2")) return false;
-    consumeToken(b, VALUE);
-    return true;
+  /* ********************************************************** */
+  // normalClassDeclaration
+  public static boolean topLevelClassOrInterfaceDeclaration(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "topLevelClassOrInterfaceDeclaration")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, TOP_LEVEL_CLASS_OR_INTERFACE_DECLARATION, "<top level class or interface declaration>");
+    r = normalClassDeclaration(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // IDENTIFIER
+  public static boolean typeIdentifier(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "typeIdentifier")) return false;
+    if (!nextTokenIs(b, IDENTIFIER)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, IDENTIFIER);
+    exit_section_(b, m, TYPE_IDENTIFIER, r);
+    return r;
   }
 
 }

@@ -10,10 +10,36 @@
   elementTypeHolderClass="io.github.potjerodekool.nabuidea.language.psi.NabuTypes"
   elementTypeClass="io.github.potjerodekool.nabuidea.language.psi.NabuElementType"
   tokenTypeClass="io.github.potjerodekool.nabuidea.language.psi.NabuTokenType"
+  psiImplUtilClass="io.github.potjerodekool.nabuidea.language.psi.impl.NabuPsiImplUtil"
 }
 
-nabuFile ::= item_*
+nabuFile ::= compilationUnit
 
-private item_ ::= (property|COMMENT|CRLF)
+compilationUnit ::= ordinaryCompilationUnit
 
-property ::= (KEY? SEPARATOR VALUE?) | KEY
+ordinaryCompilationUnit ::= packageDeclaration?
+topLevelClassOrInterfaceDeclaration*
+
+packageDeclaration ::= PACKAGE IDENTIFIER (DOT IDENTIFIER)* SEMI_COLON COMMENT?
+
+topLevelClassOrInterfaceDeclaration ::=
+normalClassDeclaration
+
+normalClassDeclaration ::= classModifier* CLASS typeIdentifier classBody
+
+classModifier ::=
+PUBLIC
+| PROTECTED
+| PRIVATE
+| ABSTRACT
+| STATIC
+| FINAL
+| SEALED
+| NON_SEALED
+| STRICTFP
+
+typeIdentifier ::= IDENTIFIER
+
+classBody ::=
+LBRACE
+RBRACE

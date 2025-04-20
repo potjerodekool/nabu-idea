@@ -31,5 +31,8 @@
         <lang.parserDefinition
                 language="Nabu"
                 implementationClass="io.github.potjerodekool.nabuidea.language.NabuParserDefinition"/>
+        <lang.syntaxHighlighterFactory
+                language="Nabu"
+                implementationClass="io.github.potjerodekool.nabuidea.language.NabuSyntaxHighlighterFactory"/>
     </extensions>
 </idea-plugin>

@@ -22,7 +22,7 @@ class NabuParserDefinition : ParserDefinition  {
     }
 
     override fun createLexer(project: Project?): Lexer {
-        return SimpleLexerAdapter()
+        return NabuLexerAdapter()
     }
 
     override fun createParser(project: Project?): PsiParser {

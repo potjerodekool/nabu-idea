@@ -5,8 +5,6 @@ import io.github.potjerodekool.nabuidea.language.psi.NabuTypes
 
 interface NabuTokenSets {
     companion object {
-        val IDENTIFIERS: TokenSet = TokenSet.create(NabuTypes.KEY)
-
         val COMMENTS: TokenSet = TokenSet.create(NabuTypes.COMMENT)
     }
 }
