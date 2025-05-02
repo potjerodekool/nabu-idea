@@ -5,5 +5,5 @@ import javax.swing.Icon
 
 
 object Icons {
-    val FILE: Icon = getIcon("/icons/nabu.png", Icons::class.java)
+    val FILE: Icon = getIcon("/icons/nabu.svg", Icons::class.java)
 }

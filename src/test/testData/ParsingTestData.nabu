@@ -1,4 +1,12 @@
 package foo.bar;
 
+import java.util.*;
+import java.util.List;
+
 public abstract class SomeClass {
+
+    private static int b = 1;
+
+    private Class<String> stringType = String.class;
+
 }

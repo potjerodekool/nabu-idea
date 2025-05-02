@@ -8,7 +8,7 @@
     <name>Nabu-Idea</name>
 
     <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
-    <vendor email="everttigchelaar@gmail.com" url="https://github.com/potjerodekool/nabu">potjerodekool</vendor>
+    <vendor email="everttigchelaar@gmail.com" url="https://github.com/potjerodekool/nabu-idea">potjerodekool</vendor>
 
     <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
          Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
@@ -18,6 +18,8 @@
     <!-- Product and plugin compatibility requirements.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
     <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.java-capable</depends>
+    <depends>com.intellij.java</depends>
 
     <!-- Extension points defined by the plugin.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
@@ -33,6 +35,31 @@
                 implementationClass="io.github.potjerodekool.nabuidea.language.NabuParserDefinition"/>
         <lang.syntaxHighlighterFactory
                 language="Nabu"
-                implementationClass="io.github.potjerodekool.nabuidea.language.NabuSyntaxHighlighterFactory"/>
+                implementationClass="io.github.potjerodekool.nabuidea.language.highlight.NabuSyntaxHighlighterFactory"/>
+        <lang.psiStructureViewFactory
+                language="Nabu"
+                implementationClass="io.github.potjerodekool.nabuidea.language.structure.NabuStructureViewFactory"/>
+        <psi.referenceContributor
+                language="JAVA"
+                implementation="io.github.potjerodekool.nabuidea.language.NabuReferenceContributor"/>
+        <gotoClassContributor implementation="io.github.potjerodekool.nabuidea.language.NabuGotoClassContributor"/>
+        <completion.contributor language="Nabu" implementationClass="io.github.potjerodekool.nabuidea.language.NabuCompletionContributor" />
+
+        <lang.refactoringSupport
+                language="Nabu"
+                implementationClass="io.github.potjerodekool.nabuidea.language.NabuRefactoringSupportProvider"/>
+        <findUsagesHandlerFactory implementation="io.github.potjerodekool.nabuidea.findUsages.NabuFindUsagesHandlerFactory"/>
+        <lang.findUsagesProvider language="Nabu"
+                                 implementationClass="io.github.potjerodekool.nabuidea.findUsages.NabuFindUsagesProvider"/>
+        <lang.elementManipulator forClass="com.intellij.lang.properties.psi.impl.PropertyKeyImpl"
+                                 implementationClass="io.github.potjerodekool.nabuidea.language.NabuManipulator"/>
+
+        <renamePsiElementProcessor implementation="io.github.potjerodekool.nabuidea.language.rename.NabuRenameProcessor"/>
+        <automaticRenamerFactory implementation="io.github.potjerodekool.nabuidea.language.rename.NabuAutomaticRenamerFactory"/>
+        <renameFileActionProvider implementation="io.github.potjerodekool.nabuidea.refactoring.actions.ClassAwareRenameFileProvider"/>
+        <renameInputValidator implementation="io.github.potjerodekool.nabuidea.language.rename.NabuTypeRenameValidator"/>
+        <renamerFactory implementation="io.github.potjerodekool.nabuidea.refactoring.rename.NabuRenamerFactory"/>
+        <renameHandler implementation="io.github.potjerodekool.nabuidea.refactoring.rename.NabuRenameInPlaceHandler"/>
+        <targetElementEvaluator language="Nabu" implementationClass="io.github.potjerodekool.nabuidea.codeInsight.NabuTargetElementEvaluator"/>
     </extensions>
 </idea-plugin>
