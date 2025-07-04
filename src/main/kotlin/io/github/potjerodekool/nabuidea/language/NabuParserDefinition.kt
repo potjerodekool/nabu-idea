@@ -9,153 +9,154 @@ import com.intellij.psi.FileViewProvider
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.intellij.psi.tree.IElementType
-import com.intellij.psi.tree.IFileElementType
 import com.intellij.psi.tree.TokenSet
 import io.github.potjerodekool.nabu.NabuLexer
 import io.github.potjerodekool.nabu.NabuParser
 import io.github.potjerodekool.nabuidea.NabuLanguage
 import io.github.potjerodekool.nabuidea.language.psi.util.NabuElementKind
-import io.github.potjerodekool.nabuidea.language.psi.NabuFile
-import io.github.potjerodekool.nabuidea.language.psi.NabuAdditionalBound
-import io.github.potjerodekool.nabuidea.language.psi.NabuAdditiveExpression
-import io.github.potjerodekool.nabuidea.language.psi.NabuAmbiguousName
-import io.github.potjerodekool.nabuidea.language.psi.NabuAndExpression
-import io.github.potjerodekool.nabuidea.language.psi.NabuAnnotation
-import io.github.potjerodekool.nabuidea.language.psi.NabuAnnotationInterfaceBody
-import io.github.potjerodekool.nabuidea.language.psi.NabuAnnotationInterfaceDeclaration
-import io.github.potjerodekool.nabuidea.language.psi.NabuAnnotationInterfaceElementDeclaration
-import io.github.potjerodekool.nabuidea.language.psi.NabuAnnotationInterfaceMemberDeclaration
-import io.github.potjerodekool.nabuidea.language.psi.NabuArrayType
-import io.github.potjerodekool.nabuidea.language.psi.NabuAssignmentExpression
-import io.github.potjerodekool.nabuidea.language.psi.NabuClassBody
-import io.github.potjerodekool.nabuidea.language.psi.NabuClassBodyDeclaration
-import io.github.potjerodekool.nabuidea.language.psi.NabuClassDeclarationWrapper
-import io.github.potjerodekool.nabuidea.language.psi.NabuClassExtends
-import io.github.potjerodekool.nabuidea.language.psi.NabuClassImplements
-import io.github.potjerodekool.nabuidea.language.psi.NabuClassLiteral
-import io.github.potjerodekool.nabuidea.language.psi.NabuClassMemberDeclaration
-import io.github.potjerodekool.nabuidea.language.psi.NabuClassOrInterfaceType
-import io.github.potjerodekool.nabuidea.language.psi.NabuClassPermits
-import io.github.potjerodekool.nabuidea.language.psi.NabuClassType
-import io.github.potjerodekool.nabuidea.language.psi.NabuCoit
-import io.github.potjerodekool.nabuidea.language.psi.NabuCompactConstructorDeclaration
-import io.github.potjerodekool.nabuidea.language.psi.NabuCompilationUnitWrapper
-import io.github.potjerodekool.nabuidea.language.psi.NabuConditionalAndExpression
-import io.github.potjerodekool.nabuidea.language.psi.NabuConditionalExpression
-import io.github.potjerodekool.nabuidea.language.psi.NabuConditionalOrExpression
-import io.github.potjerodekool.nabuidea.language.psi.NabuConstantDeclaration
-import io.github.potjerodekool.nabuidea.language.psi.NabuConstructorBody
-import io.github.potjerodekool.nabuidea.language.psi.NabuConstructorDeclaration
-import io.github.potjerodekool.nabuidea.language.psi.NabuConstructorDeclarator
-import io.github.potjerodekool.nabuidea.language.psi.NabuContextualKeyword
-import io.github.potjerodekool.nabuidea.language.psi.NabuContextualKeywordMinusForTypeIdentifier
-import io.github.potjerodekool.nabuidea.language.psi.NabuContextualKeywordMinusForUnqualifiedFunctionIdentifier
-import io.github.potjerodekool.nabuidea.language.psi.NabuDefaultValue
-import io.github.potjerodekool.nabuidea.language.psi.NabuDims
-import io.github.potjerodekool.nabuidea.language.psi.NabuEnumBody
-import io.github.potjerodekool.nabuidea.language.psi.NabuEnumBodyDeclarations
-import io.github.potjerodekool.nabuidea.language.psi.NabuEnumConstant
-import io.github.potjerodekool.nabuidea.language.psi.NabuEnumConstantList
-import io.github.potjerodekool.nabuidea.language.psi.NabuEqualityExpression
-import io.github.potjerodekool.nabuidea.language.psi.NabuExceptionType
-import io.github.potjerodekool.nabuidea.language.psi.NabuExceptionTypeList
-import io.github.potjerodekool.nabuidea.language.psi.NabuExclusiveOrExpression
-import io.github.potjerodekool.nabuidea.language.psi.NabuExplicitConstructorInvocation
-import io.github.potjerodekool.nabuidea.language.psi.NabuExpression
-import io.github.potjerodekool.nabuidea.language.psi.NabuExpressionName
-import io.github.potjerodekool.nabuidea.language.psi.NabuFieldDeclaration
-import io.github.potjerodekool.nabuidea.language.psi.NabuFloatingPointType
-import io.github.potjerodekool.nabuidea.language.psi.NabuFormalParameter
-import io.github.potjerodekool.nabuidea.language.psi.NabuFormalParameterList
-import io.github.potjerodekool.nabuidea.language.psi.NabuFunctionBody
-import io.github.potjerodekool.nabuidea.language.psi.NabuFunctionDeclaration
-import io.github.potjerodekool.nabuidea.language.psi.NabuFunctionDeclarator
-import io.github.potjerodekool.nabuidea.language.psi.NabuFunctionHeader
-import io.github.potjerodekool.nabuidea.language.psi.NabuFunctionName
-import io.github.potjerodekool.nabuidea.language.psi.NabuIdentifier
-import io.github.potjerodekool.nabuidea.language.psi.NabuImportDeclaration
-import io.github.potjerodekool.nabuidea.language.psi.NabuInclusiveOrExpression
-import io.github.potjerodekool.nabuidea.language.psi.NabuInstanceInitializer
-import io.github.potjerodekool.nabuidea.language.psi.NabuIntegralType
-import io.github.potjerodekool.nabuidea.language.psi.NabuInterfaceBody
-import io.github.potjerodekool.nabuidea.language.psi.NabuInterfaceDeclaration
-import io.github.potjerodekool.nabuidea.language.psi.NabuInterfaceExtends
-import io.github.potjerodekool.nabuidea.language.psi.NabuInterfaceFunctionDeclaration
-import io.github.potjerodekool.nabuidea.language.psi.NabuInterfaceMemberDeclaration
-import io.github.potjerodekool.nabuidea.language.psi.NabuInterfacePermits
-import io.github.potjerodekool.nabuidea.language.psi.NabuInterfaceType
-import io.github.potjerodekool.nabuidea.language.psi.NabuInterfaceTypeList
-import io.github.potjerodekool.nabuidea.language.psi.NabuLiteral
-import io.github.potjerodekool.nabuidea.language.psi.NabuModifier
-import io.github.potjerodekool.nabuidea.language.psi.NabuModuleDeclaration
-import io.github.potjerodekool.nabuidea.language.psi.NabuModuleDirective
-import io.github.potjerodekool.nabuidea.language.psi.NabuModuleName
-import io.github.potjerodekool.nabuidea.language.psi.NabuMultiplicativeExpression
-import io.github.potjerodekool.nabuidea.language.psi.NabuNormalAnnotation
-import io.github.potjerodekool.nabuidea.language.psi.NabuClassDeclaration
-import io.github.potjerodekool.nabuidea.language.psi.NabuNormalInterfaceDeclaration
-import io.github.potjerodekool.nabuidea.language.psi.NabuNumericType
-import io.github.potjerodekool.nabuidea.language.psi.NabuCompilationUnit
-import io.github.potjerodekool.nabuidea.language.psi.NabuPackageDeclaration
-import io.github.potjerodekool.nabuidea.language.psi.NabuPackageModifier
-import io.github.potjerodekool.nabuidea.language.psi.NabuPackageName
-import io.github.potjerodekool.nabuidea.language.psi.NabuPackageOrTypeName
-import io.github.potjerodekool.nabuidea.language.psi.NabuPostfixExpression
-import io.github.potjerodekool.nabuidea.language.psi.NabuPrimary
-import io.github.potjerodekool.nabuidea.language.psi.NabuPrimaryNoNewArray
-import io.github.potjerodekool.nabuidea.language.psi.NabuPrimitiveType
-import io.github.potjerodekool.nabuidea.language.psi.NabuReceiverParameter
-import io.github.potjerodekool.nabuidea.language.psi.NabuRecordBody
-import io.github.potjerodekool.nabuidea.language.psi.NabuRecordBodyDeclaration
-import io.github.potjerodekool.nabuidea.language.psi.NabuRecordComponent
-import io.github.potjerodekool.nabuidea.language.psi.NabuRecordComponentList
-import io.github.potjerodekool.nabuidea.language.psi.NabuRecordHeader
-import io.github.potjerodekool.nabuidea.language.psi.NabuReferenceType
-import io.github.potjerodekool.nabuidea.language.psi.NabuRelationalExpression
-import io.github.potjerodekool.nabuidea.language.psi.NabuRequiresModifier
-import io.github.potjerodekool.nabuidea.language.psi.NabuResult
-import io.github.potjerodekool.nabuidea.language.psi.NabuShiftExpression
-import io.github.potjerodekool.nabuidea.language.psi.NabuSimpleTypeName
-import io.github.potjerodekool.nabuidea.language.psi.NabuSingleStaticImportDeclaration
-import io.github.potjerodekool.nabuidea.language.psi.NabuSingleTypeImportDeclaration
-import io.github.potjerodekool.nabuidea.language.psi.NabuStandardElement
-import io.github.potjerodekool.nabuidea.language.psi.NabuStart
-import io.github.potjerodekool.nabuidea.language.psi.NabuStaticImportOnDemandDeclaration
-import io.github.potjerodekool.nabuidea.language.psi.NabuStaticInitializer
-import io.github.potjerodekool.nabuidea.language.psi.NabuThrowsT
-import io.github.potjerodekool.nabuidea.language.psi.NabuTopLevelClassOrInterfaceDeclaration
-import io.github.potjerodekool.nabuidea.language.psi.NabuTypeArgument
-import io.github.potjerodekool.nabuidea.language.psi.NabuTypeArgumentList
-import io.github.potjerodekool.nabuidea.language.psi.NabuTypeArguments
-import io.github.potjerodekool.nabuidea.language.psi.NabuTypeBound
-import io.github.potjerodekool.nabuidea.language.psi.NabuTypeIdentifier
-import io.github.potjerodekool.nabuidea.language.psi.NabuTypeImportOnDemandDeclaration
-import io.github.potjerodekool.nabuidea.language.psi.NabuTypeName
-import io.github.potjerodekool.nabuidea.language.psi.NabuTypeParameter
-import io.github.potjerodekool.nabuidea.language.psi.NabuTypeParameterList
-import io.github.potjerodekool.nabuidea.language.psi.NabuTypeParameterModifier
-import io.github.potjerodekool.nabuidea.language.psi.NabuTypeParameters
-import io.github.potjerodekool.nabuidea.language.psi.NabuTypeVariable
-import io.github.potjerodekool.nabuidea.language.psi.NabuUCOIT
-import io.github.potjerodekool.nabuidea.language.psi.NabuUnannArrayType
-import io.github.potjerodekool.nabuidea.language.psi.NabuUnannClassOrInterfaceType
-import io.github.potjerodekool.nabuidea.language.psi.NabuUnannClassType
-import io.github.potjerodekool.nabuidea.language.psi.NabuUnannInterfaceType
-import io.github.potjerodekool.nabuidea.language.psi.NabuUnannPrimitiveType
-import io.github.potjerodekool.nabuidea.language.psi.NabuUnannReferenceType
-import io.github.potjerodekool.nabuidea.language.psi.NabuUnannType
-import io.github.potjerodekool.nabuidea.language.psi.NabuUnannTypeVariable
-import io.github.potjerodekool.nabuidea.language.psi.NabuUnaryExpression
-import io.github.potjerodekool.nabuidea.language.psi.NabuUnaryExpressionNotPlusMinus
-import io.github.potjerodekool.nabuidea.language.psi.NabuUnqualifiedFunctionIdentifier
-import io.github.potjerodekool.nabuidea.language.psi.NabuVariableArityParameter
-import io.github.potjerodekool.nabuidea.language.psi.NabuVariableArityRecordComponent
-import io.github.potjerodekool.nabuidea.language.psi.NabuVariableDeclarator
-import io.github.potjerodekool.nabuidea.language.psi.NabuVariableDeclaratorId
-import io.github.potjerodekool.nabuidea.language.psi.NabuVariableDeclaratorList
-import io.github.potjerodekool.nabuidea.language.psi.NabuVariableInitializer
-import io.github.potjerodekool.nabuidea.language.psi.NabuWildcard
-import io.github.potjerodekool.nabuidea.language.psi.NabuWildcardBounds
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuFileImpl
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuAdditionalBound
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuAdditiveExpression
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuAmbiguousName
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuAndExpression
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuAnnotation
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuAnnotationInterfaceBody
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuAnnotationInterfaceDeclaration
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuAnnotationInterfaceElementDeclaration
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuAnnotationInterfaceMemberDeclaration
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuArrayType
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuAssignmentExpression
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuClassBody
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuClassBodyDeclaration
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuClassDeclarationWrapper
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuClassExtends
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuClassImplements
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuClassLiteral
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuClassMemberDeclaration
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuClassOrInterfaceType
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuClassPermits
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuClassType
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuCoit
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuCompactConstructorDeclaration
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuCompilationUnitWrapper
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuConditionalAndExpression
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuConditionalExpression
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuConditionalOrExpression
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuConstantDeclaration
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuConstructorBody
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuConstructorDeclaration
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuConstructorDeclarator
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuContextualKeyword
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuContextualKeywordMinusForTypeIdentifier
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuContextualKeywordMinusForUnqualifiedFunctionIdentifier
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuDefaultValue
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuDims
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuEnumBody
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuEnumBodyDeclarations
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuEnumConstant
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuEnumConstantList
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuEqualityExpression
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuExceptionType
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuExceptionTypeList
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuExclusiveOrExpression
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuExplicitConstructorInvocation
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuExpression
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuExpressionName
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuFieldDeclaration
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuFloatingPointType
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuFormalParameter
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuFormalParameterList
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuFunctionBody
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuFunctionDeclaration
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuFunctionDeclarator
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuFunctionHeader
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuFunctionName
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuIdentifier
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuImportDeclaration
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuInclusiveOrExpression
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuInstanceInitializer
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuIntegralType
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuInterfaceBody
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuInterfaceDeclaration
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuInterfaceExtends
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuInterfaceFunctionDeclaration
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuInterfaceMemberDeclaration
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuInterfacePermits
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuInterfaceType
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuInterfaceTypeList
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuLiteral
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuModifier
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuModuleDeclaration
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuModuleDirective
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuModuleName
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuMultiplicativeExpression
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuNormalAnnotation
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuClassDeclaration
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuNormalInterfaceDeclaration
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuNumericType
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuCompilationUnit
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuElementTypes
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuPackageDeclaration
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuPackageModifier
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuPackageName
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuPackageOrTypeName
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuPostfixExpression
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuPrimary
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuPrimaryNoNewArray
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuPrimitiveType
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuReceiverParameter
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuRecordBody
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuRecordBodyDeclaration
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuRecordComponent
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuRecordComponentList
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuRecordHeader
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuReferenceType
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuRelationalExpression
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuRequiresModifier
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuResult
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuShiftExpression
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuSimpleTypeName
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuSingleStaticImportDeclaration
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuSingleTypeImportDeclaration
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuStandardElement
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuStart
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuStaticImportOnDemandDeclaration
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuStaticInitializer
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuThrowsT
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuTopLevelClassOrInterfaceDeclaration
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuTypeArgument
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuTypeArgumentList
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuTypeArguments
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuTypeBound
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuTypeIdentifier
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuTypeImportOnDemandDeclaration
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuTypeName
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuTypeParameter
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuTypeParameterList
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuTypeParameterModifier
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuTypeParameters
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuTypeVariable
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuUCOIT
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuUnannArrayType
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuUnannClassOrInterfaceType
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuUnannClassType
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuUnannInterfaceType
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuUnannPrimitiveType
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuUnannReferenceType
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuUnannType
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuUnannTypeVariable
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuUnaryExpression
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuUnaryExpressionNotPlusMinus
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuUnqualifiedFunctionIdentifier
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuVariableArityParameter
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuVariableArityRecordComponent
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuVariableDeclarator
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuVariableDeclaratorId
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuVariableDeclaratorList
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuVariableInitializer
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuWildcard
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuWildcardBounds
+import io.github.potjerodekool.nabuidea.language.psi.stub.NabuFileElementType
 import org.antlr.intellij.adaptor.lexer.ANTLRLexerAdaptor
 import org.antlr.intellij.adaptor.lexer.PSIElementTypeFactory
 import org.antlr.intellij.adaptor.lexer.RuleIElementType
@@ -166,7 +167,8 @@ import org.antlr.v4.runtime.tree.ParseTree
 
 class NabuParserDefinition : ParserDefinition {
 
-    val FILE: IFileElementType = IFileElementType(NabuLanguage)
+    //val FILE: IFileElementType = IFileElementType(NabuLanguage)
+    val FILE = NabuFileElementType()
 
     val tokenElementTypes: List<TokenIElementType>
     val tokenElementTypeMap: Map<String, TokenIElementType>
@@ -207,7 +209,7 @@ class NabuParserDefinition : ParserDefinition {
         }
     }
 
-    override fun getFileNodeType(): IFileElementType {
+    override fun getFileNodeType(): NabuFileElementType {
         return FILE
     }
 
@@ -282,7 +284,7 @@ class NabuParserDefinition : ParserDefinition {
                 NabuParser.RULE_moduleDirective -> NabuModuleDirective(node)
                 NabuParser.RULE_requiresModifier -> NabuRequiresModifier(node)
                 NabuParser.RULE_classDeclaration -> NabuClassDeclarationWrapper(node)
-                NabuParser.RULE_normalClassDeclaration -> NabuClassDeclaration(node, NabuElementKind.CLASS)
+                NabuParser.RULE_normalClassDeclaration -> NabuClassDeclaration(node, NabuElementKind.CLASS, NabuElementTypes.CLAZZ)
                 NabuParser.RULE_classModifier -> NabuModifier(node)
                 NabuParser.RULE_typeParameters -> NabuTypeParameters(node)
                 NabuParser.RULE_typeParameterList -> NabuTypeParameterList(node)
@@ -330,13 +332,13 @@ class NabuParserDefinition : ParserDefinition {
                 NabuParser.RULE_simpleTypeName -> NabuSimpleTypeName(node)
                 NabuParser.RULE_constructorBody -> NabuConstructorBody(node)
                 NabuParser.RULE_explicitConstructorInvocation -> NabuExplicitConstructorInvocation(node)
-                NabuParser.RULE_enumDeclaration -> NabuClassDeclaration(node, NabuElementKind.ENUM)
+                NabuParser.RULE_enumDeclaration -> NabuClassDeclaration(node, NabuElementKind.ENUM, NabuElementTypes.CLAZZ)
                 NabuParser.RULE_enumBody -> NabuEnumBody(node)
                 NabuParser.RULE_enumConstantList -> NabuEnumConstantList(node)
                 NabuParser.RULE_enumConstant -> NabuEnumConstant(node)
                 NabuParser.RULE_enumConstantModifier -> NabuModifier(node)
                 NabuParser.RULE_enumBodyDeclarations -> NabuEnumBodyDeclarations(node)
-                NabuParser.RULE_recordDeclaration -> NabuClassDeclaration(node, NabuElementKind.RECORD)
+                NabuParser.RULE_recordDeclaration -> NabuClassDeclaration(node, NabuElementKind.RECORD, NabuElementTypes.CLAZZ)
                 NabuParser.RULE_recordHeader -> NabuRecordHeader(node)
                 NabuParser.RULE_recordComponentList -> NabuRecordComponentList(node)
                 NabuParser.RULE_recordComponent -> NabuRecordComponent(node)
@@ -488,6 +490,6 @@ class NabuParserDefinition : ParserDefinition {
     }
 
     override fun createFile(viewProvider: FileViewProvider): PsiFile {
-        return NabuFile(viewProvider)
+        return NabuFileImpl(viewProvider)
     }
 }

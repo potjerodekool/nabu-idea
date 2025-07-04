@@ -1,4 +1,6 @@
+import org.jetbrains.intellij.platform.gradle.IntelliJPlatformType
 import org.jetbrains.intellij.platform.gradle.TestFrameworkType
+import org.jetbrains.intellij.platform.gradle.models.ProductRelease
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
@@ -69,6 +71,20 @@ tasks.named<Test>("test") {
 }
 
 intellijPlatform {
+    pluginVerification {
+        ides {
+            ide(IntelliJPlatformType.IntellijIdeaCommunity, "2025.1.3")
+            local(file("C:\\Program Files (x86)\\JetBrains\\IntelliJ IDEA Community Edition 2025.1.3"))
+            recommended()
+            select {
+                types = listOf(IntelliJPlatformType.IntellijIdeaCommunity)
+                channels = listOf(ProductRelease.Channel.RELEASE)
+                sinceBuild = "251"
+                untilBuild = "251.*"
+            }
+        }
+    }
+
     pluginConfiguration {
         ideaVersion {
             sinceBuild = "242"

@@ -11,7 +11,7 @@ import com.intellij.util.containers.ContainerUtil
 import com.intellij.util.indexing.FindSymbolParameters
 import com.intellij.util.indexing.IdFilter
 import io.github.potjerodekool.nabuidea.NabuLanguage
-import io.github.potjerodekool.nabuidea.language.psi.NabuPsiClass
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuPsiClass
 
 class NabuGotoClassContributor : ChooseByNameContributorEx,
     GotoClassContributor,

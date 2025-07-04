@@ -8,6 +8,8 @@ import com.intellij.codeInsight.completion.CompletionType
 import com.intellij.codeInsight.lookup.LookupElementBuilder
 import com.intellij.patterns.PlatformPatterns
 import com.intellij.psi.PsiElement
+import com.intellij.psi.PsiImportStatement
+import com.intellij.psi.PsiJavaCodeReferenceElement
 import com.intellij.psi.PsiQualifiedNamedElement
 import com.intellij.util.ProcessingContext
 import org.jetbrains.uast.UastFacade
@@ -18,7 +20,8 @@ class NabuCompletionContributor : CompletionContributor() {
     init {
         extend(
             CompletionType.BASIC,
-            PlatformPatterns.psiElement(),
+            PlatformPatterns.psiElement(PsiJavaCodeReferenceElement::class.java)
+                .withParent(PsiImportStatement::class.java),
             object : CompletionProvider<CompletionParameters?>() {
                 override fun addCompletions(
                     parameters: CompletionParameters,

@@ -2,11 +2,9 @@ package io.github.potjerodekool.nabuidea.language.highlight
 
 import com.intellij.lang.BracePair
 import com.intellij.lang.PairedBraceMatcher
-import com.intellij.psi.JavaDocTokenType
-import com.intellij.psi.JavaTokenType
 import com.intellij.psi.PsiFile
 import com.intellij.psi.tree.IElementType
-import io.github.potjerodekool.nabuidea.language.psi.NabuTokenType
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuTokenType
 
 class NabuBraceMatcher : PairedBraceMatcher {
 

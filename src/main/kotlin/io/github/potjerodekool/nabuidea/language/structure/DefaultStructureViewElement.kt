@@ -6,7 +6,7 @@ import com.intellij.navigation.ItemPresentation
 import com.intellij.openapi.util.NlsSafe
 import com.intellij.psi.NavigatablePsiElement
 import com.intellij.ui.RowIcon
-import io.github.potjerodekool.nabuidea.language.psi.NabuFunctionDeclaration
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuFunctionDeclaration
 import io.github.potjerodekool.nabuidea.language.structure.IconUtils.getModifierIcon
 import javax.swing.Icon
 

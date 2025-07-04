@@ -30,7 +30,7 @@ import com.intellij.psi.javadoc.PsiDocComment
 import com.intellij.psi.scope.PsiScopeProcessor
 import com.intellij.psi.search.GlobalSearchScope
 import com.intellij.psi.search.SearchScope
-import io.github.potjerodekool.nabuidea.language.psi.NabuClassDeclaration
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuClassDeclaration
 import org.jetbrains.annotations.NonNls
 import org.jetbrains.annotations.Unmodifiable
 import javax.swing.Icon

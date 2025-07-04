@@ -5,8 +5,8 @@ import com.intellij.psi.PsiManager
 import com.intellij.psi.search.FileTypeIndex
 import com.intellij.psi.search.GlobalSearchScope
 import io.github.potjerodekool.nabuidea.NabuFileType
-import io.github.potjerodekool.nabuidea.language.psi.NabuFile
-import io.github.potjerodekool.nabuidea.language.psi.NabuNamedElement
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuFileImpl
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuNamedElement
 import io.github.potjerodekool.nabuidea.language.structure.SimplePsiTreeUtils
 
 object NabuUtils {
@@ -27,7 +27,7 @@ object NabuUtils {
             val virtualFiles = FileTypeIndex.getFiles(NabuFileType, GlobalSearchScope.allScope(project))
 
             virtualFiles.forEach { virtualFile ->
-                val nabuFile = PsiManager.getInstance(project).findFile(virtualFile) as NabuFile?
+                val nabuFile = PsiManager.getInstance(project).findFile(virtualFile) as NabuFileImpl?
 
                 if (nabuFile != null) {
                     val compilationUnit = SimplePsiTreeUtils.getCompilationUnit(nabuFile)

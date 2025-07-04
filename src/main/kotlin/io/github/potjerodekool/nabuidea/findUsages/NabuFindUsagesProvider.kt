@@ -12,8 +12,8 @@ import com.intellij.util.indexing.IndexingBundle
 import io.github.potjerodekool.nabu.NabuLexer
 import io.github.potjerodekool.nabuidea.NabuLanguage
 import io.github.potjerodekool.nabuidea.language.NabuTokenSets
-import io.github.potjerodekool.nabuidea.language.psi.NabuNamedElement
-import io.github.potjerodekool.nabuidea.language.psi.NabuPsiClass
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuNamedElement
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuPsiClass
 import io.github.potjerodekool.nabuidea.language.psi.util.NabuElementKind
 import org.antlr.intellij.adaptor.lexer.ANTLRLexerAdaptor
 import org.jetbrains.annotations.Nls

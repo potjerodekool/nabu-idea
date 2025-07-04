@@ -9,7 +9,7 @@ import com.intellij.psi.search.PsiElementProcessor
 import com.intellij.psi.search.PsiElementProcessorAdapter
 import com.intellij.usageView.UsageInfo
 import com.intellij.util.Processor
-import io.github.potjerodekool.nabuidea.language.psi.NabuClassDeclaration
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuClassDeclaration
 import io.github.potjerodekool.nabuidea.runReadAction
 import io.github.potjerodekool.nabuidea.search.HierarchySearchRequest
 import java.util.*

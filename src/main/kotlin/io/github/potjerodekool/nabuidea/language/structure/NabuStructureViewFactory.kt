@@ -7,13 +7,13 @@ import com.intellij.lang.PsiStructureViewFactory
 import com.intellij.openapi.editor.Editor
 import com.intellij.psi.NavigatablePsiElement
 import com.intellij.psi.PsiFile
-import io.github.potjerodekool.nabuidea.language.psi.NabuFile
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuFileImpl
 
 class NabuStructureViewFactory : PsiStructureViewFactory {
     override fun getStructureViewBuilder(psiFile: PsiFile): StructureViewBuilder? {
         return object : TreeBasedStructureViewBuilder() {
             override fun createStructureViewModel(editor: Editor?): StructureViewModel {
-                val nabuFile = psiFile as NabuFile
+                val nabuFile = psiFile as NabuFileImpl
                 val cu = SimplePsiTreeUtils.getCompilationUnit(nabuFile)
                 val topLevels =
                     SimplePsiTreeUtils.getTopLevelDeclarations(cu)

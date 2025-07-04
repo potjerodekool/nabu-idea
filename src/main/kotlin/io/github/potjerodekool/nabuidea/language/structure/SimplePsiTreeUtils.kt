@@ -4,23 +4,23 @@ import com.intellij.ide.util.treeView.smartTree.TreeElement
 import com.intellij.psi.NavigatablePsiElement
 import com.intellij.psi.PsiElement
 import com.intellij.psi.util.PsiTreeUtil
-import io.github.potjerodekool.nabuidea.language.psi.NabuClassBody
-import io.github.potjerodekool.nabuidea.language.psi.NabuClassBodyDeclaration
-import io.github.potjerodekool.nabuidea.language.psi.NabuClassDeclarationWrapper
-import io.github.potjerodekool.nabuidea.language.psi.NabuClassMemberDeclaration
-import io.github.potjerodekool.nabuidea.language.psi.NabuCompilationUnitWrapper
-import io.github.potjerodekool.nabuidea.language.psi.NabuFieldDeclaration
-import io.github.potjerodekool.nabuidea.language.psi.NabuFile
-import io.github.potjerodekool.nabuidea.language.psi.NabuFunctionDeclaration
-import io.github.potjerodekool.nabuidea.language.psi.NabuClassDeclaration
-import io.github.potjerodekool.nabuidea.language.psi.NabuCompilationUnit
-import io.github.potjerodekool.nabuidea.language.psi.NabuStart
-import io.github.potjerodekool.nabuidea.language.psi.NabuTopLevelClassOrInterfaceDeclaration
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuClassBody
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuClassBodyDeclaration
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuClassDeclarationWrapper
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuClassMemberDeclaration
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuCompilationUnitWrapper
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuFieldDeclaration
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuFileImpl
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuFunctionDeclaration
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuClassDeclaration
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuCompilationUnit
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuStart
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuTopLevelClassOrInterfaceDeclaration
 import org.antlr.intellij.adaptor.psi.ANTLRPsiNode
 
 object SimplePsiTreeUtils {
 
-    fun getCompilationUnit(file: NabuFile): PsiElement? {
+    fun getCompilationUnit(file: NabuFileImpl): PsiElement? {
         val start = PsiTreeUtil.getChildOfType(
             file,
             NabuStart::class.java

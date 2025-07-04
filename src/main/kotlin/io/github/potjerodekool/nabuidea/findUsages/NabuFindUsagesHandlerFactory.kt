@@ -4,7 +4,7 @@ import com.intellij.find.findUsages.FindUsagesHandler
 import com.intellij.find.findUsages.FindUsagesHandlerFactory
 import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiElement
-import io.github.potjerodekool.nabuidea.language.psi.NabuClassDeclaration
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuClassDeclaration
 
 class NabuFindUsagesHandlerFactory(project: Project) : FindUsagesHandlerFactory() {
 

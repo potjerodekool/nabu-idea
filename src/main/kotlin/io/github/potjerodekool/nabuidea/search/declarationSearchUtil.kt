@@ -7,7 +7,7 @@ import com.intellij.psi.search.SearchScope
 import com.intellij.psi.search.searches.ClassInheritorsSearch
 import com.intellij.util.EmptyQuery
 import com.intellij.util.Query
-import io.github.potjerodekool.nabuidea.language.psi.NabuClassDeclaration
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuClassDeclaration
 import io.github.potjerodekool.nabuidea.language.psi.util.ToPsi
 
 interface DeclarationSearchRequest<in T> {

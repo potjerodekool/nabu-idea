@@ -4,10 +4,10 @@ import com.intellij.ide.structureView.StructureViewModelBase
 import com.intellij.ide.structureView.StructureViewTreeElement
 import com.intellij.ide.util.treeView.smartTree.Sorter
 import com.intellij.openapi.editor.Editor
-import io.github.potjerodekool.nabuidea.language.psi.NabuFile
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuFileImpl
 
 class NabuStructureViewModel(editor: Editor?,
-                             nabuFile: NabuFile,
+                             nabuFile: NabuFileImpl,
                              root: StructureViewTreeElement) : StructureViewModelBase(nabuFile, editor,root) {
 
     override fun getSorters(): Array<out Sorter> {

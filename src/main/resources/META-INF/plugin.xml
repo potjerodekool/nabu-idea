@@ -1,11 +1,11 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
     <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
-    <id>io.github.potjerodekool.nabu-idea</id>
+    <id>io.github.potjerodekool.nabu</id>
 
     <!-- Public plugin name should be written in Title Case.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
-    <name>Nabu-Idea</name>
+    <name>Nabu</name>
 
     <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
     <vendor email="everttigchelaar@gmail.com" url="https://github.com/potjerodekool/nabu-idea">potjerodekool</vendor>
@@ -40,7 +40,7 @@
                 language="Nabu"
                 implementationClass="io.github.potjerodekool.nabuidea.language.structure.NabuStructureViewFactory"/>
         <psi.referenceContributor
-                language="JAVA"
+                language="Nabu"
                 implementation="io.github.potjerodekool.nabuidea.language.NabuReferenceContributor"/>
         <gotoClassContributor implementation="io.github.potjerodekool.nabuidea.language.NabuGotoClassContributor"/>
         <completion.contributor language="Nabu" implementationClass="io.github.potjerodekool.nabuidea.language.NabuCompletionContributor" />
@@ -61,5 +61,17 @@
         <renamerFactory implementation="io.github.potjerodekool.nabuidea.refactoring.rename.NabuRenamerFactory"/>
         <renameHandler implementation="io.github.potjerodekool.nabuidea.refactoring.rename.NabuRenameInPlaceHandler"/>
         <targetElementEvaluator language="Nabu" implementationClass="io.github.potjerodekool.nabuidea.codeInsight.NabuTargetElementEvaluator"/>
+
+        <stubElementTypeHolder class="io.github.potjerodekool.nabuidea.language.psi.stub.NabuStubElementTypes"
+                               externalIdPrefix="NABU"/>
+
+        <!--
+        <stubIndex implementation="io.github.potjerodekool.nabuidea.language.NabuClassIndexOld"/>
+        -->
+<!--
+        <applicationService serviceInterface="io.github.potjerodekool.nabuidea.language.psi.stub.NabuStubIndexService"
+                            serviceImplementation="io.github.potjerodekool.nabuidea.language.psi.stub.NabuIdeStubIndexService"/>
+        -->
     </extensions>
+
 </idea-plugin>

@@ -5,7 +5,7 @@ import com.intellij.psi.tree.IElementType
 import com.intellij.psi.tree.ParentAwareTokenSet
 import io.github.potjerodekool.nabuidea.NabuFileType
 import io.github.potjerodekool.nabuidea.NabuLanguage
-import io.github.potjerodekool.nabuidea.language.psi.NabuTokenType
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuTokenType
 
 class NabuPairedBraceMatcher : PairedBraceAndAnglesMatcher(
     NabuBraceMatcher(), NabuLanguage, NabuFileType, Holder.TYPE_TOKENS

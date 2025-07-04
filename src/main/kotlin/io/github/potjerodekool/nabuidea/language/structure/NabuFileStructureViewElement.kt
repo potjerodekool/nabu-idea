@@ -4,16 +4,16 @@ import com.intellij.ide.util.treeView.smartTree.TreeElement
 import com.intellij.psi.NavigatablePsiElement
 import com.intellij.psi.PsiElement
 import com.intellij.psi.util.PsiTreeUtil
-import io.github.potjerodekool.nabuidea.language.psi.NabuFile
-import io.github.potjerodekool.nabuidea.language.psi.NabuClassBody
-import io.github.potjerodekool.nabuidea.language.psi.NabuClassBodyDeclaration
-import io.github.potjerodekool.nabuidea.language.psi.NabuClassDeclarationWrapper
-import io.github.potjerodekool.nabuidea.language.psi.NabuClassMemberDeclaration
-import io.github.potjerodekool.nabuidea.language.psi.NabuFieldDeclaration
-import io.github.potjerodekool.nabuidea.language.psi.NabuFunctionDeclaration
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuFileImpl
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuClassBody
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuClassBodyDeclaration
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuClassDeclarationWrapper
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuClassMemberDeclaration
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuFieldDeclaration
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuFunctionDeclaration
 import io.github.potjerodekool.nabuidea.language.structure.SimplePsiTreeUtils.toTreeElements
 
-class NabuFileStructureViewElement(element: NabuFile) : NabuStructureViewElement<NabuFile>(element) {
+class NabuFileStructureViewElement(element: NabuFileImpl) : NabuStructureViewElement<NabuFileImpl>(element) {
 
     override fun getChildren(): Array<out TreeElement?> {
         val compilationUnit = SimplePsiTreeUtils.getCompilationUnit(element)

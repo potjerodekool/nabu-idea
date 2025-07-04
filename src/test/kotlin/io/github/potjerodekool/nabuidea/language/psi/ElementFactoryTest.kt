@@ -59,7 +59,10 @@ class ElementFactoryTest {
 
         NabuLanguage.putUserData(cacheKey, NabuParserDefinition())
 
-        val typeIdentifier = NabuElementFactory.createTypeIdentifier(project, "Myclass")
+        val typeIdentifier = NabuElementFactory.createTypeIdentifier(
+            project = project,
+identifier = "Myclass"
+        )
         assertNotNull(typeIdentifier)
     }
 

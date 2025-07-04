@@ -4,11 +4,10 @@ import com.intellij.patterns.ElementPattern
 import com.intellij.psi.PsiElement
 import com.intellij.refactoring.rename.RenameInputValidator
 import com.intellij.util.ProcessingContext
-import io.github.potjerodekool.nabuidea.pattern.PsiNabuPatterns
 
 class NabuTypeRenameValidator : RenameInputValidator {
     override fun getPattern(): ElementPattern<out PsiElement?> {
-        return PsiNabuPatterns.psiClass()
+        TODO()
     }
 
     override fun isInputValid(

@@ -3,19 +3,19 @@ package io.github.potjerodekool.nabuidea.language.psi.util
 import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiFileFactory
 import io.github.potjerodekool.nabuidea.NabuLanguage
-import io.github.potjerodekool.nabuidea.language.psi.NabuFile
-import io.github.potjerodekool.nabuidea.language.psi.NabuTypeIdentifier
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuFileImpl
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuTypeIdentifier
 
 object NabuElementFactory {
 
-    fun createFile(project: Project, text: String): NabuFile {
+    fun createFile(project: Project, text: String): NabuFileImpl {
         val name = "dummy.nabu"
         return PsiFileFactory.getInstance(project).createFileFromText(
             name,
             NabuLanguage,
             text,
 
-        ) as NabuFile
+        ) as NabuFileImpl
     }
 
     fun createTypeIdentifier(project: Project,

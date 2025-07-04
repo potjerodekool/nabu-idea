@@ -3,7 +3,7 @@ package io.github.potjerodekool.nabuidea.codeInsight
 import com.intellij.codeInsight.TargetElementEvaluatorEx2
 import com.intellij.codeInsight.TargetElementUtilExtender
 import com.intellij.psi.PsiElement
-import io.github.potjerodekool.nabuidea.language.psi.NabuPsiClass
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuPsiClass
 
 class NabuTargetElementEvaluator : TargetElementEvaluatorEx2(), TargetElementUtilExtender {
 

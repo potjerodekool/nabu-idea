@@ -1,7 +1,7 @@
 package io.github.potjerodekool.nabuidea.language.psi.util
 
 import com.intellij.psi.PsiElement
-import io.github.potjerodekool.nabuidea.language.psi.NabuClassDeclaration
+import io.github.potjerodekool.nabuidea.language.psi.impl.NabuClassDeclaration
 
 enum class NabuElementKind(val type: String) {
 
