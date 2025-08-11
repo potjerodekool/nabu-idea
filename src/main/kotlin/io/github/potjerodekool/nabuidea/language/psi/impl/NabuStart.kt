@@ -12,4 +12,9 @@ class NabuStart(astNode: ASTNode) : ANTLRPsiNode(astNode), ScopeNode {
         TODO("Not yet implemented")
     }
 
+    fun findCompilationUnit(): NabuCompilationUnit? {
+        val wrapper = findChildByClass(NabuCompilationUnitWrapper::class.java)
+        return wrapper?.findCompilationUnit()
+    }
+
 }

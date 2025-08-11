@@ -1,7 +1,12 @@
 package io.github.potjerodekool.nabuidea.language
 
 import com.intellij.lang.ASTNode
+import com.intellij.openapi.project.Project
+import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.psi.PsiClass
+import com.intellij.psi.search.FileTypeIndex
+import com.intellij.psi.search.GlobalSearchScope
+import io.github.potjerodekool.nabuidea.NabuFileType
 import io.github.potjerodekool.nabuidea.language.psi.impl.NabuNamedElement
 
 object NabuPsiUtils {

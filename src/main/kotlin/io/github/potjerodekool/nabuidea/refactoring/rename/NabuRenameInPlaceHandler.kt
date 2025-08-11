@@ -13,7 +13,6 @@ import com.intellij.psi.PsiFile
 import com.intellij.psi.PsiNamedElement
 import com.intellij.psi.PsiReference
 import com.intellij.psi.util.PsiTreeUtil
-import com.intellij.refactoring.RefactoringBundle
 import com.intellij.refactoring.rename.PsiElementRenameHandler
 import com.intellij.refactoring.rename.RenameHandler
 import com.intellij.refactoring.rename.RenameHandlerRegistry
@@ -153,11 +152,7 @@ class NabuRenameInPlaceHandler : RenameHandler, TitledHandler {
     ): Boolean {
 
         if (!isAvailableOnDataContext(dataContext)) {
-            val handler = RenameHandlerRegistry.getInstance().getRenameHandler(dataContext)
-
-            if (handler == null) {
-                return false
-            }
+            val handler = RenameHandlerRegistry.getInstance().getRenameHandler(dataContext) ?: return false
 
             handler.invoke(
                 elementToRename.project,
@@ -193,8 +188,9 @@ class NabuRenameInPlaceHandler : RenameHandler, TitledHandler {
         }
     }
 
-    override fun getActionTitle(): @NlsActions.ActionText String? {
-        return RefactoringBundle.message("rename.title")
+    override fun getActionTitle(): @NlsActions.ActionText String {
+        //return RefactoringBundle.message("rename.title")
+        return "Actie titel"
     }
 
 }

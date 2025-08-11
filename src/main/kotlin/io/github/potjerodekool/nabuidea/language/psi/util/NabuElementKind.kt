@@ -6,7 +6,9 @@ import io.github.potjerodekool.nabuidea.language.psi.impl.NabuClassDeclaration
 enum class NabuElementKind(val type: String) {
 
     CLASS("class"),
+    INTERFACE("interface"),
     ENUM("enum"),
+    ANNOTATION("annotation"),
     RECORD("record");
 
     companion object {

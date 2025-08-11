@@ -7,8 +7,13 @@ import org.antlr.intellij.adaptor.psi.ANTLRPsiNode
 import org.antlr.intellij.adaptor.psi.ScopeNode
 
 class NabuCompilationUnitWrapper(astNode: ASTNode) : ANTLRPsiNode(astNode), ScopeNode {
+
     override fun resolve(element: PsiNamedElement?): PsiElement? {
         TODO("Not yet implemented")
+    }
+
+    fun findCompilationUnit(): NabuCompilationUnit? {
+        return findChildByClass(NabuCompilationUnit::class.java)
     }
 
 }

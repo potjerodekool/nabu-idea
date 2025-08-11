@@ -7,7 +7,7 @@ plugins {
     id("java")
     id("org.jetbrains.kotlin.jvm") version "2.2.0-Beta1"
     id("org.jetbrains.intellij.platform") version "2.5.0"
-    id("antlr")
+    //id("antlr")
 }
 
 group = "io.github.potjerodekool"
@@ -18,19 +18,20 @@ sourceSets {
     main {
         java {
             srcDirs(
-                "src/main/gen",
-                "build/generated-src/antlr/main"
+                "src/main/gen"//,
+                //"build/generated-src/antlr/main"
             )
         }
     }
     test {
         java {
-            srcDirs("build/generated-src/antlr/test")
+            //srcDirs("build/generated-src/antlr/test")
         }
     }
 }
 
 repositories {
+    mavenLocal()
     mavenCentral()
     intellijPlatform {
         defaultRepositories()
@@ -51,9 +52,13 @@ dependencies {
 
         testImplementation("junit:junit:4.13.2")
     }
+    /*
     antlr("org.antlr:antlr4:4.13.2") {
         exclude(group = "com.ibm.icu", module = "icu4j")
     }
+    */
+
+    implementation("io.github.potjerodekool:nabu-compiler:1.0-SNAPSHOT")
 
     implementation("org.antlr:antlr4-intellij-adaptor:0.1")
 
@@ -107,6 +112,7 @@ tasks {
     }
 }
 
+/*
 tasks.generateGrammarSource {
     maxHeapSize = "64m"
     outputDirectory = File("build/generated-src/antlr/main/io/github/potjerodekool/nabu")
@@ -119,3 +125,4 @@ val compileTestKotlinTask by tasks.compileTestKotlin
 
 compileKotlinTask.dependsOn(generateGrammarSourceTask)
 compileTestKotlinTask.dependsOn (generateTestGrammarSourceTask)
+*/

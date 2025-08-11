@@ -50,6 +50,7 @@ object NabuTypes {
     val CASE = findTokenIElementType(NabuLexer.CASE)
     val DEFAULT = findTokenIElementType(NabuLexer.DEFAULT)
     val TYPE_IDENTIFIER = findRuleIElementType(NabuParser.RULE_typeIdentifier)
+    val TYPE_NAME = findRuleIElementType(NabuParser.RULE_typeName)
     val IDENTIFIER = findTokenIElementType(NabuLexer.Identifier);
     val LOCAL_VARIABLE_TYPE = findRuleIElementType(NabuParser.RULE_localVariableType)
 
@@ -57,6 +58,13 @@ object NabuTypes {
     val SIMPLE_TYPE_NAME = findRuleIElementType(NabuParser.RULE_simpleTypeName);
     val NORMAL_CLASS_DECLARATION = findRuleIElementType(NabuParser.RULE_normalClassDeclaration)
     val PACKAGE_DECLARATION = findRuleIElementType(NabuParser.RULE_packageDeclaration)
+    val IMPORT_DECLARATION = findRuleIElementType(NabuParser.RULE_importDeclaration)
+
+    val SINGLE_TYPE_IMPORT = findRuleIElementType(NabuParser.RULE_singleTypeImportDeclaration)
+    val TYPE_IMPORT_ON_DEMAND = findRuleIElementType(NabuParser.RULE_typeImportOnDemandDeclaration)
+    val SINGLE_STATIC_IMPORT = findRuleIElementType(NabuParser.RULE_singleStaticImportDeclaration)
+    val STATIC_IMPORT_ON_DEMAND = findRuleIElementType(NabuParser.RULE_staticImportOnDemandDeclaration)
+
     val NEW = findTokenIElementType(NabuLexer.NEW)
 
     private fun findTokenIElementType(antlrTokenType: Int): TokenIElementType {

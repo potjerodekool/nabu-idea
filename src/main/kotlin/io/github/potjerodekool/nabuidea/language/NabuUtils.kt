@@ -23,27 +23,24 @@ object NabuUtils {
     fun findClassesByFilter(project: Project, filter: (NabuNamedElement) -> Boolean): List<NabuNamedElement> {
         val result = mutableListOf<NabuNamedElement>()
 
-        try {
-            val virtualFiles = FileTypeIndex.getFiles(NabuFileType, GlobalSearchScope.allScope(project))
+        val virtualFiles = FileTypeIndex.getFiles(NabuFileType, GlobalSearchScope.allScope(project))
+        val psiManager = PsiManager.getInstance(project)
 
-            virtualFiles.forEach { virtualFile ->
-                val nabuFile = PsiManager.getInstance(project).findFile(virtualFile) as NabuFileImpl?
+        virtualFiles.forEach { virtualFile ->
+            val nabuFile = psiManager.findFile(virtualFile) as NabuFileImpl?
 
-                if (nabuFile != null) {
-                    val compilationUnit = SimplePsiTreeUtils.getCompilationUnit(nabuFile)
-                    val topLevels = SimplePsiTreeUtils.getTopLevelDeclarations(compilationUnit);
+            if (nabuFile != null) {
+                val compilationUnit = SimplePsiTreeUtils.getCompilationUnit(nabuFile)
+                val topLevels = SimplePsiTreeUtils.getTopLevelDeclarations(compilationUnit);
 
-                    topLevels
-                        .map { topLevel -> topLevel as NabuNamedElement }
-                        .forEach { topLevel ->
-                            if (filter.invoke(topLevel)) {
-                                result.add(topLevel)
-                            }
+                topLevels
+                    .map { topLevel -> topLevel as NabuNamedElement }
+                    .forEach { topLevel ->
+                        if (filter.invoke(topLevel)) {
+                            result.add(topLevel)
                         }
-                }
+                    }
             }
-        } catch (e: Exception) {
-            e.printStackTrace()
         }
 
         return result

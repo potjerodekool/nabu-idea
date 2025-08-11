@@ -67,8 +67,8 @@ class NabuFindClassUsagesHandler(element: NabuClassDeclaration,
 
     override fun getStringsToSearch(element: PsiElement): Collection<String> {
         val psiClass = when (element) {
-            is PsiClass -> element
             is NabuClassDeclaration -> element
+            is PsiClass -> element
             else -> null
         } ?: return Collections.emptyList()
 

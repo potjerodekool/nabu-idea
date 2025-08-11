@@ -17,9 +17,11 @@
 
     <!-- Product and plugin compatibility requirements.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
+
     <depends>com.intellij.modules.platform</depends>
     <depends>com.intellij.modules.java-capable</depends>
     <depends>com.intellij.java</depends>
+
 
     <!-- Extension points defined by the plugin.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
@@ -41,9 +43,13 @@
                 implementationClass="io.github.potjerodekool.nabuidea.language.structure.NabuStructureViewFactory"/>
         <psi.referenceContributor
                 language="Nabu"
-                implementation="io.github.potjerodekool.nabuidea.language.NabuReferenceContributor"/>
+                implementation="io.github.potjerodekool.nabuidea.language.reference.NabuReferenceContributor"/>
+
+        <java.elementFinder implementation="io.github.potjerodekool.nabuidea.language.reference.NabuPsiElementFinder"/>
+
         <gotoClassContributor implementation="io.github.potjerodekool.nabuidea.language.NabuGotoClassContributor"/>
         <completion.contributor language="Nabu" implementationClass="io.github.potjerodekool.nabuidea.language.NabuCompletionContributor" />
+        <compiler.task execute="BEFORE" implementation="io.github.potjerodekool.nabuidea.compiler.NabuCompilerTask" />
 
         <lang.refactoringSupport
                 language="Nabu"
@@ -58,8 +64,10 @@
         <automaticRenamerFactory implementation="io.github.potjerodekool.nabuidea.language.rename.NabuAutomaticRenamerFactory"/>
         <renameFileActionProvider implementation="io.github.potjerodekool.nabuidea.refactoring.actions.ClassAwareRenameFileProvider"/>
         <renameInputValidator implementation="io.github.potjerodekool.nabuidea.language.rename.NabuTypeRenameValidator"/>
+        <!--
         <renamerFactory implementation="io.github.potjerodekool.nabuidea.refactoring.rename.NabuRenamerFactory"/>
         <renameHandler implementation="io.github.potjerodekool.nabuidea.refactoring.rename.NabuRenameInPlaceHandler"/>
+        -->
         <targetElementEvaluator language="Nabu" implementationClass="io.github.potjerodekool.nabuidea.codeInsight.NabuTargetElementEvaluator"/>
 
         <stubElementTypeHolder class="io.github.potjerodekool.nabuidea.language.psi.stub.NabuStubElementTypes"

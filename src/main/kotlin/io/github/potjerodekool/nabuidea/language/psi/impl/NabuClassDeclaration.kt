@@ -5,13 +5,16 @@ import com.intellij.lang.ASTNode
 import com.intellij.navigation.ItemPresentation
 import com.intellij.openapi.util.NlsSafe
 import com.intellij.openapi.util.Pair
+import com.intellij.openapi.util.TextRange
 import com.intellij.psi.*
+import com.intellij.psi.PsiClass
 import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry
 import com.intellij.psi.javadoc.PsiDocComment
 import com.intellij.psi.tree.IElementType
 import com.intellij.psi.util.PsiTreeUtil
 import com.intellij.ui.RowIcon
 import io.github.potjerodekool.nabuidea.language.NabuPsiUtils
+import io.github.potjerodekool.nabuidea.language.reference.NabuReference
 import io.github.potjerodekool.nabuidea.language.NabuTypes
 import io.github.potjerodekool.nabuidea.language.psi.util.NabuElementFactory
 import io.github.potjerodekool.nabuidea.language.psi.util.NabuElementKind
@@ -309,9 +312,8 @@ class NabuClassDeclaration(
     }
 
     override fun getReferences(): Array<out PsiReference?> {
-        this as PsiNamedElement
-
-        return ReferenceProvidersRegistry.getReferencesFromProviders(this)
+        val references = ReferenceProvidersRegistry.getReferencesFromProviders(this);
+        return references
         //return arrayOf(NabuReference(this))
     }
 
@@ -346,5 +348,43 @@ class NabuClassDeclaration(
     override fun getTypeParameters(): Array<out PsiTypeParameter?> {
         return emptyArray()
     }
+
+    override fun getReference(): PsiReference? {
+        val qName = qualifiedName
+
+        return if (qName != null)
+                NabuReference(this, TextRange(0,0), qName)
+        else null
+    }
+
+    fun getCompilationUnit(): NabuCompilationUnit? {
+        var element = this.parent
+
+        while (element != null && element !is NabuCompilationUnit) {
+            element = element.parent
+        }
+
+        return element
+    }
+
+    /*
+    override fun getParent(): PsiElement {
+        var element = super.getParent()
+
+        while (element !is NabuCompilationUnit) {
+            element = element.parent
+        }
+
+        if (element is NabuCompilationUnit) {
+            val packageDeclaration = element.findPackageDeclaration()
+
+            if (packageDeclaration != null) {
+                return packageDeclaration
+            }
+        }
+
+        return super.getParent()
+    }
+    */
 
 }
