@@ -56,18 +56,18 @@ object SimplePsiTreeUtils {
             NabuTopLevelClassOrInterfaceDeclaration::class.java
         )
 
-        return topLevels.map { topLevel ->
-            PsiTreeUtil.getChildOfAnyType(
-                topLevel,
-                NabuClassDeclarationWrapper::class.java
-            )
-        }.map {
-            //TODO add others
-            PsiTreeUtil.getChildOfAnyType(
-                it,
-                NabuClassDeclaration::class.java
-            ) as PsiElement
-        }
+        return topLevels
+            .mapNotNull { topLevel ->
+                PsiTreeUtil.getChildOfAnyType(
+                    topLevel,
+                    NabuClassDeclarationWrapper::class.java
+                )
+            }.mapNotNull {
+                PsiTreeUtil.getChildOfAnyType(
+                    it,
+                    NabuClassDeclaration::class.java
+                )
+            }
     }
 
     fun getTopLevelChildren(topLevel: PsiElement): List<TreeElement> {

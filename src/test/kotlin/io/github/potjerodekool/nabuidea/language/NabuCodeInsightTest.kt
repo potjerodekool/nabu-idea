@@ -1,13 +1,14 @@
 package io.github.potjerodekool.nabuidea.language
-
+/*
 import com.intellij.testFramework.fixtures.LightPlatformCodeInsightFixture4TestCase
 import org.junit.Test
 import kotlin.test.Ignore
+*/
 
+//@Ignore
+class NabuCodeInsightTest /*: LightPlatformCodeInsightFixture4TestCase()*/ {
 
-@Ignore
-class NabuCodeInsightTest : LightPlatformCodeInsightFixture4TestCase() {
-
+    /*
     override fun getTestDataPath(): String {
         return "src/test/testData"
     }
@@ -31,4 +32,6 @@ class NabuCodeInsightTest : LightPlatformCodeInsightFixture4TestCase() {
 //        assertEquals("https://en.wikipedia.org/", resolvedSimpleProperty.getValue())
     }
     */
+
+     */
 }

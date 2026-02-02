@@ -28,7 +28,7 @@ class NabuPsiElementFinder(private val project: Project) : PsiElementFinder() {
             .map { it as PsiClass }
 
         if (qualifiedName.startsWith("bar.") && classes.isEmpty()) {
-            log("class ${qualifiedName} not found")
+            log("class $qualifiedName not found")
         }
 
         return classes
@@ -49,7 +49,7 @@ class NabuPsiElementFinder(private val project: Project) : PsiElementFinder() {
         val classes = findClasses(qualifiedName, project)
 
         if (qualifiedName.startsWith("bar.") && classes.isEmpty()) {
-            log("class ${qualifiedName} not found")
+            log("class $qualifiedName not found")
         }
 
         return if (classes.size == 1) classes.first()
@@ -88,7 +88,7 @@ class NabuPsiElementFinder(private val project: Project) : PsiElementFinder() {
         val p = super.findPackage(qualifiedName)
 
         if (p == null) {
-            log("package ${qualifiedName} not found")
+            log("package $qualifiedName not found")
         }
 
         return p
@@ -103,7 +103,7 @@ class NabuPsiElementFinder(private val project: Project) : PsiElementFinder() {
 
         val psiManager = PsiManager.getInstance(this.project)
         return PackageIndex.getInstance(this.project)
-            .getDirsByPackageName(psiPackage.getQualifiedName(), false)
+            .getDirsByPackageName(psiPackage.qualifiedName, false)
             .forEach(object : ReadActionProcessor<VirtualFile?>() {
 
                 override fun processInReadAction(dir: VirtualFile?): Boolean {
@@ -130,7 +130,7 @@ class NabuPsiElementFinder(private val project: Project) : PsiElementFinder() {
 
         val psiManager = PsiManager.getInstance(this.project)
         return PackageIndex.getInstance(this.project)
-            .getDirsByPackageName(psiPackage.getQualifiedName(), false)
+            .getDirsByPackageName(psiPackage.qualifiedName, false)
             .forEach(object : ReadActionProcessor<VirtualFile?>() {
 
                 override fun processInReadAction(dir: VirtualFile?): Boolean {

@@ -13,7 +13,7 @@
     <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
          Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
-    <description><![CDATA[Nabu IDEA plugin for the nabu programming language]]></description>
+    <description><![CDATA[Nabu IDEA plugin for the Nabu programming language]]></description>
 
     <!-- Product and plugin compatibility requirements.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
@@ -22,6 +22,11 @@
     <depends>com.intellij.modules.java-capable</depends>
     <depends>com.intellij.java</depends>
 
+    <actions>
+        <action id="Nabu.NewFile" class="io.github.potjerodekool.nabuidea.action.NewFileAction">
+            <add-to-group group-id="NewGroup" anchor="after" relative-to-action="NewGroup1"/>
+        </action>
+    </actions>
 
     <!-- Extension points defined by the plugin.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
@@ -32,6 +37,9 @@
                 fieldName="INSTANCE"
                 language="Nabu"
                 extensions="nabu"/>
+
+        <fileTemplateGroup implementation="io.github.potjerodekool.nabuidea.template.NabuFileTemplateGroupDescriptor"/>
+
         <lang.parserDefinition
                 language="Nabu"
                 implementationClass="io.github.potjerodekool.nabuidea.language.NabuParserDefinition"/>
@@ -81,5 +89,11 @@
                             serviceImplementation="io.github.potjerodekool.nabuidea.language.psi.stub.NabuIdeStubIndexService"/>
         -->
     </extensions>
+    
+    <projectListeners>
+        <listener
+                class="io.github.potjerodekool.nabuidea.compiler.NabuCompilationStatusListener"
+                topic="com.intellij.openapi.compiler.CompilationStatusListener"/>
+    </projectListeners>
 
 </idea-plugin>

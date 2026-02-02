@@ -1,12 +1,12 @@
-import org.jetbrains.intellij.platform.gradle.IntelliJPlatformType
 import org.jetbrains.intellij.platform.gradle.TestFrameworkType
-import org.jetbrains.intellij.platform.gradle.models.ProductRelease
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     id("java")
-    id("org.jetbrains.kotlin.jvm") version "2.2.0-Beta1"
-    id("org.jetbrains.intellij.platform") version "2.5.0"
+    //id("org.jetbrains.kotlin.jvm") version "2.2.0-Beta1"
+    kotlin("jvm") version "2.3.0"
+    id("org.jetbrains.intellij.platform") version "2.11.0"
+    //id("org.jetbrains.intellij.platform") version "2.5.0"
     //id("antlr")
 }
 
@@ -42,7 +42,8 @@ repositories {
 // Read more: https://plugins.jetbrains.com/docs/intellij/tools-intellij-platform-gradle-plugin.html
 dependencies {
     intellijPlatform {
-        create("IC", "2025.1")
+        //create("IC", "2025.1")
+        intellijIdea("2025.3.1")
         //testFramework(org.jetbrains.intellij.platform.gradle.TestFrameworkType.Platform)
         testFramework(TestFrameworkType.Platform)
         //testFramework(TestFrameworkType.Plugin.Java)
@@ -58,12 +59,15 @@ dependencies {
     }
     */
 
-    implementation("io.github.potjerodekool:nabu-compiler:1.0-SNAPSHOT")
+    implementation("io.github.potjerodekool:nabu-compiler:0.1.0-SNAPSHOT")
+
+    implementation("io.github.potjerodekool:nabu-daemon:0.1.0-SNAPSHOT")
+    implementation("io.github.potjerodekool:nabu-client:0.1.0-SNAPSHOT")
 
     implementation("org.antlr:antlr4-intellij-adaptor:0.1")
 
     testImplementation("junit:junit:4.13.2")
-    testImplementation(kotlin("test"))
+    //testImplementation(kotlin("test"))
     testImplementation("org.mockito:mockito-core:5.11.0")
 }
 
@@ -76,6 +80,7 @@ tasks.named<Test>("test") {
 }
 
 intellijPlatform {
+    /*
     pluginVerification {
         ides {
             ide(IntelliJPlatformType.IntellijIdeaCommunity, "2025.1.3")
@@ -89,15 +94,19 @@ intellijPlatform {
             }
         }
     }
+    */
 
     pluginConfiguration {
+        /*
         ideaVersion {
             sinceBuild = "242"
         }
-
+        */
+/*
         changeNotes = """
       Initial version
     """.trimIndent()
+        */
     }
 }
 
